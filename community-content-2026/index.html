@@ -128,7 +128,11 @@ mark.hl{color:inherit;background:linear-gradient(transparent 52%,var(--teal-l) 5
 .opts.chips .opt .key{display:none}
 .other-wrap{display:none}
 .other-wrap.show{display:block}
-.other-hint{margin:8px 2px 0;font-size:15px;color:var(--ink-2)}
+.q-hint{margin:0;font-family:var(--body);font-weight:600;font-size:clamp(22px,2.4vw,28px);line-height:1.35;color:var(--teal-d)}
+.other-hint{margin:10px 2px 0;font-size:clamp(20px,2vw,24px);font-weight:600;line-height:1.4;color:var(--ink-2)}
+.inline-next{display:none;justify-content:flex-end}
+.inline-next.show{display:flex}
+.inline-next .btn{min-width:150px;justify-content:center}
 .other-hint b{color:var(--ink);background:var(--mint);border-radius:6px;padding:1px 6px;white-space:nowrap}
 .other-in,.field input,.open-in{width:100%;border:1.5px solid var(--ink);background:var(--sheet);padding:14px 15px;font-size:18px;outline:none;border-radius:12px;transition:box-shadow .2s}
 .other-in:focus,.field input:focus,.open-in:focus{box-shadow:0 0 0 4px rgba(61,220,216,.45)}
@@ -610,14 +614,16 @@ window.ICONS = {"claude": {"label": "Claude", "fill": "#D97757", "path": "m4.714
       (ico||'<span class="key">'+(LETTERS[i]||i+1)+'</span>')+'<span>'+rich(optLabel(o))+'</span><span class="tick" aria-hidden="true">✓</span></button>';}
 
   function qHtml(p){var q=p.q,body;
-    var head='<span class="eyebrow">'+esc(q.kicker||("שאלה "+p.n+" מתוך "+Q.length))+'</span><h2 class="title" id="t-'+q.id+'">'+rich(q.title)+'</h2>'+(q.subtitle?'<p class="sub">'+rich(q.subtitle)+"</p>":"")+(q.multiple?'<p class="hint">אפשר לבחור יותר מתשובה אחת, ואז ללחוץ על "המשך"</p>':"");
+    var head='<span class="eyebrow">'+esc(q.kicker||("שאלה "+p.n+" מתוך "+Q.length))+'</span><h2 class="title" id="t-'+q.id+'">'+rich(q.title)+'</h2>'+(q.subtitle?'<p class="sub">'+rich(q.subtitle)+"</p>":"")+(q.multiple?'<p class="q-hint">אפשר לבחור יותר מתשובה אחת, ואז ללחוץ על "המשך" שמתחת לתשובות</p>':"");
     if(q.type==="choice"){var o=(q.options||[]).map(function(x,i){return optHtml(q,x,i,false);});if(q.other!==false)o.push(optHtml(q,q.otherLabel||"אחר",o.length,true));
-      body='<div class="opts '+(q.layout||"stack")+'" role="'+(q.multiple?"group":"radiogroup")+'" aria-labelledby="t-'+q.id+'">'+o.join("")+'</div><div class="other-wrap"><input class="other-in" id="o-'+q.id+'" type="text" maxlength="200" enterkeyhint="next" placeholder="'+esc(q.otherPlaceholder||"כתבו כאן את התשובה שלכם")+'" aria-label="פירוט לתשובה אחר"><p class="other-hint">כתבו את התשובה ולחצו על <b>המשך ←</b> למטה משמאל</p></div>';}
+      body='<div class="opts '+(q.layout||"stack")+'" role="'+(q.multiple?"group":"radiogroup")+'" aria-labelledby="t-'+q.id+'">'+o.join("")+'</div><div class="other-wrap"><input class="other-in" id="o-'+q.id+'" type="text" maxlength="200" enterkeyhint="next" placeholder="'+esc(q.otherPlaceholder||"כתבו כאן את התשובה שלכם")+'" aria-label="פירוט לתשובה אחר"><p class="other-hint">כתבו את התשובה ולחצו על <b>המשך ←</b></p></div>';}
     else if(q.type==="scale"){var b=[];for(var v=(q.min||1);v<=(q.max||10);v++)b.push('<button type="button" class="opt" role="radio" aria-checked="false" data-v="'+v+'" style="animation-delay:'+(.12+v*.03)+'s">'+v+"</button>");
       body='<div class="scale" role="radiogroup" aria-labelledby="t-'+q.id+'">'+b.join("")+'</div><div class="scale-ends"><span>'+rich((q.labels||[])[0]||"")+"</span><span>"+rich((q.labels||[])[1]||"")+"</span></div>";}
     else body='<textarea class="open-in" id="x-'+q.id+'" maxlength="'+(q.maxLength||600)+'" placeholder="'+esc(q.placeholder||"כתבו כאן…")+'" aria-labelledby="t-'+q.id+'"></textarea>';
     var prop=propHtml(q);
-    return '<div class="q-grid'+(prop?"":" solo")+'"><div class="prop-zone'+(prop?"":" none")+'" aria-hidden="true">'+prop+'</div><div class="q-main">'+head+body+'<div class="err" role="alert"></div></div></div>';}
+    var needs=q.multiple||q.type==="open"||S.autoAdvance===false;
+    var inline='<div class="inline-next'+(needs?" show":"")+'"><button type="button" class="btn btn-go" data-next>המשך <span aria-hidden="true">←</span></button></div>';
+    return '<div class="q-grid'+(prop?"":" solo")+'"><div class="prop-zone'+(prop?"":" none")+'" aria-hidden="true">'+prop+'</div><div class="q-main">'+head+body+'<div class="err" role="alert"></div>'+inline+'</div></div>';}
 
   function welcomeHtml(){var w=S.welcome||{};var pr=(w.props||[])[0];
     return '<div class="hero">'+(pr?'<div class="hero-visual" aria-hidden="true">'+propHtml({prop:pr})+"</div>":"")+
@@ -687,7 +693,9 @@ window.ICONS = {"claude": {"label": "Claude", "fill": "#D97757", "path": "m4.714
       if(q.type==="scale"&&a.value==null&&q.required)return "בחרו מספר כדי להמשיך";
       if(q.type==="open"&&q.required&&String(a.text||"").trim().length<2)return "כתבו כמה מילים כדי להמשיך";return "";}
     function paint(){el.querySelectorAll(".opt").forEach(function(b){var on=q.type==="scale"?String(a.value)===b.dataset.v:a.choice.indexOf(+b.dataset.i)>-1;b.setAttribute("aria-checked",on?"true":"false");});
-      if(ow)ow.classList.toggle("show",a.choice.indexOf((q.options||[]).length)>-1);}
+      var otherOn=a.choice.indexOf((q.options||[]).length)>-1;
+      if(ow)ow.classList.toggle("show",otherOn);
+      if(!(q.multiple||q.type==="open"||S.autoAdvance===false))el.querySelector(".inline-next").classList.toggle("show",otherOn);}
     function sync(){paint();var ok=!valid();nextBtn.disabled=false;nextBtn.classList.toggle("ready",ok);}
     function react(idx){if(t&&PROPS[t])PROPS[t].update(zone,q,answerText(q),idx);}
     p.sync=sync;
@@ -695,6 +703,7 @@ window.ICONS = {"claude": {"label": "Claude", "fill": "#D97757", "path": "m4.714
     if(oi){oi.value=a.other||"";oi.addEventListener("input",function(){a.other=oi.value;err.textContent="";save();sync();});oi.addEventListener("change",function(){react(a.choice[a.choice.length-1]);});
       oi.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();p.tryNext();}});}
     if(ta){ta.value=a.text||"";ta.addEventListener("input",function(){a.text=ta.value;err.textContent="";save();sync();clearTimeout(timer);timer=setTimeout(function(){react(-1);},250);});}
+    el.querySelector("[data-next]").addEventListener("click",function(){p.tryNext();});
     el.addEventListener("click",function(e){var b=e.target.closest(".opt");if(!b)return;err.textContent="";
       if(q.type==="scale"){a.value=+b.dataset.v;}else{var i=+b.dataset.i,at=a.choice.indexOf(i);if(q.multiple){if(at>-1)a.choice.splice(at,1);else a.choice.push(i);}else a.choice=[i];
         if(b.classList.contains("other")&&a.choice.indexOf(i)>-1)setTimeout(function(){oi.focus();},50);}
