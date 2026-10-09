@@ -702,7 +702,7 @@ window.ICONS = {"claude": {"label": "Claude", "fill": "#D97757", "path": "m4.714
       // a single answer moves on by itself; with a prop there is a short pause so the object can react.
       // "Other" never auto-advances: the viewer types the answer and presses Continue.
       clearTimeout(timer);
-      if(S.autoAdvance!==false&&!q.multiple&&q.type!=="open"&&!b.classList.contains("other"))timer=setTimeout(p.tryNext,t?1050:450);});
+      if(S.autoAdvance!==false&&!q.multiple&&q.type!=="open"&&!b.classList.contains("other"))timer=setTimeout(p.tryNext,t?750:400);});
     if(answerText(q))setTimeout(function(){react(-1);},50);}
 
   /* ---------- details ---------- */
