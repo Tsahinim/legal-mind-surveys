@@ -539,9 +539,9 @@ window.ICONS = {"claude": {"label": "Claude", "fill": "#D97757", "path": "m4.714
     var q=Q.filter(function(x){return x.id===id;})[0];return q?answerText(q):"";}
   function fieldsHtml(){
     return ((S.story&&S.story.fields)||[]).map(function(f){var v=answerOf(f.from);
-      return '<div class="sf'+(v?" sf-filled":"")+'" data-from="'+esc(f.from)+'"><span class="sf-label">'+esc(f.label)+'</span><span class="sf-value">'+(v?esc(short(v,30)):"—")+"</span></div>";}).join("");}
+      return '<div class="sf'+(v?" sf-filled":"")+'" data-from="'+esc(f.from)+'"><span class="sf-label">'+esc(f.label)+'</span><span class="sf-value">'+(v?esc(short(v,30)):"…")+"</span></div>";}).join("");}
   function refreshFields(el,curId){
-    el.querySelectorAll(".sf").forEach(function(r){var v=answerOf(r.dataset.from),sp=r.querySelector(".sf-value"),nv=v?short(v,30):"—";
+    el.querySelectorAll(".sf").forEach(function(r){var v=answerOf(r.dataset.from),sp=r.querySelector(".sf-value"),nv=v?short(v,30):"…";
       r.classList.toggle("sf-current",r.dataset.from===curId);
       if(sp.textContent!==nv){sp.textContent=nv;r.classList.remove("sf-pop");void r.offsetWidth;r.classList.add("sf-pop");}});}
   function replay(el,cls){el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls);}
