@@ -519,6 +519,8 @@ window.ICONS = {"claude": {"label": "Claude", "fill": "#D97757", "path": "m4.714
 
   /* ---------- storage (optional) ---------- */
   var st={answers:{},details:{},submitted:false};
+  // tester link: ?fresh=1 clears the "already filled" lock in this browser
+  if(new URLSearchParams(location.search).get("fresh")==="1"){try{localStorage.removeItem(KEY);}catch(e){}}
   try{var sv=JSON.parse(localStorage.getItem(KEY)||"null");if(sv&&!S.testMode)st=Object.assign(st,sv);}catch(e){}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
 
