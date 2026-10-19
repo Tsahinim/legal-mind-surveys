@@ -193,18 +193,24 @@ mark.hl{color:inherit;background:linear-gradient(transparent 52%,var(--teal-l) 5
 .end p{margin:0;font-size:16px;line-height:1.55;color:var(--ink-2)}
 .end a{align-self:flex-start;margin-top:4px;font-weight:700;font-size:17px;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--teal-l);padding-bottom:1px;display:inline-flex;gap:8px;align-items:center}
 .end a:hover{border-color:var(--ink)}
-.mini-title{font-family:var(--mono);font-size:14px;letter-spacing:.06em;color:var(--teal-d);margin:22px 0 0;font-weight:700}
-.mini-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
-.mini-links a{display:inline-flex;align-items:center;gap:10px;font-size:17px;font-weight:700;color:#fff;text-decoration:none;border-radius:999px;padding:12px 22px;box-shadow:0 3px 12px rgba(19,35,58,.22);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
-.mini-links a:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(19,35,58,.3)}
-.mini-links a svg{width:22px;height:22px;flex:none;fill:#fff}
-.mini-links .ml-wa{background:#25D366}
-.mini-links .ml-yt{background:#FF0000}
-.mini-links .ml-fb{background:#1877F2}
-.mini-links .ml-in{background:#0A66C2}
-.mini-links .ml-web{background:var(--teal-d)}
-.mini-links .ml-web svg{fill:none;stroke:#fff;stroke-width:2}
-@media (max-width:620px){ .mini-links a{font-size:15.5px;padding:10px 16px} .mini-links a svg{width:19px;height:19px} }
+.mini-title{font-family:var(--mono);font-size:14px;letter-spacing:.06em;color:var(--teal-d);margin:24px 0 0;font-weight:700}
+.mini-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.mini-links a{display:inline-flex;align-items:center;gap:12px;padding:10px 20px 10px 14px;background:rgba(255,255,255,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(19,35,58,.09);border-radius:18px;box-shadow:0 2px 10px rgba(19,35,58,.07);text-decoration:none;color:var(--ink);font-weight:700;font-size:16.5px;transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)}
+.mini-links a:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(19,35,58,.16)}
+.mini-links .ml-ico{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 3px 8px rgba(19,35,58,.18)}
+.mini-links .ml-ico svg{width:21px;height:21px;fill:#fff}
+.mini-links .ml-wa .ml-ico{background:linear-gradient(135deg,#3BE481,#149D5B)}
+.mini-links .ml-wa:hover{border-color:rgba(37,211,102,.55)}
+.mini-links .ml-yt .ml-ico{background:linear-gradient(135deg,#FF5A50,#D60000)}
+.mini-links .ml-yt:hover{border-color:rgba(255,0,0,.45)}
+.mini-links .ml-fb .ml-ico{background:linear-gradient(135deg,#55A1FF,#1465D8)}
+.mini-links .ml-fb:hover{border-color:rgba(24,119,242,.5)}
+.mini-links .ml-in .ml-ico{background:linear-gradient(135deg,#3D97E8,#0A66C2)}
+.mini-links .ml-in:hover{border-color:rgba(10,102,194,.5)}
+.mini-links .ml-web .ml-ico{background:linear-gradient(135deg,#35C7BE,#0A8686)}
+.mini-links .ml-web:hover{border-color:rgba(10,134,134,.55)}
+.mini-links .ml-web .ml-ico svg{fill:none;stroke:#fff;stroke-width:2}
+@media (max-width:620px){ .mini-links{gap:9px} .mini-links a{font-size:15px;padding:8px 15px 8px 10px;gap:10px;border-radius:15px} .mini-links .ml-ico{width:34px;height:34px;border-radius:11px} .mini-links .ml-ico svg{width:18px;height:18px} }
 .end svg{width:20px;height:20px}
 
 /* ---------- privacy modal ---------- */
@@ -673,7 +679,7 @@ window.ICONS = {"claude": {"label": "Claude", "fill": "#D97757", "path": "m4.714
       fb:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>',
       "in":'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>',
       web:ICON_WEB};
-    var mini=(t.links||[]).map(function(l){return '<a class="ml-'+esc(l.kind||"web")+'" href="'+esc(l.url)+'" target="_blank" rel="noopener">'+(MICO[l.kind]||MICO.web)+'<span>'+esc(l.label)+'</span></a>';}).join("");
+    var mini=(t.links||[]).map(function(l){return '<a class="ml-'+esc(l.kind||"web")+'" href="'+esc(l.url)+'" target="_blank" rel="noopener"><span class="ml-ico">'+(MICO[l.kind]||MICO.web)+'</span><span>'+esc(l.label)+'</span></a>';}).join("");
     var miniHtml=mini?((t.linksTitle?'<p class="mini-title">'+esc(t.linksTitle)+'</p>':'')+'<div class="mini-links">'+mini+'</div>'):'';
     var prop=propHtml(t);
     return '<div class="q-grid'+(prop?"":" solo")+'"><div class="prop-zone'+(prop?"":" none")+'" aria-hidden="true">'+prop+'</div><div class="q-main"><span class="eyebrow">'+esc(t.kicker||"נשלח")+'</span><h2 class="title">'+rich(already?(t.alreadyTitle||"כבר *מילאתם*"):(t.title||"*תודה* רבה!"))+'</h2><p class="sub">'+rich(already?(t.alreadyText||"התשובות שלכם כבר אצלנו."):(t.text||"התשובות התקבלו."))+'</p>'+(cards?'<div class="ends">'+cards+"</div>":"")+miniHtml+"</div></div>";}
