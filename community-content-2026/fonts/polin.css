@@ -1,0 +1,36 @@
+/* LEGAL MIND | Polin | Regular 400 and Bold 700
+   Keep this file beside the original WOFF2 / WOFF font files.
+   Load after the existing page styles. */
+@font-face {
+  font-family: "Polin";
+  src: url("./Polin-Regular.woff2") format("woff2"),
+       url("./Polin-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Polin";
+  src: url("./Polin-Bold.woff2") format("woff2"),
+       url("./Polin-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --display: "Polin", Arial, sans-serif;
+  --body: "Polin", Arial, sans-serif;
+  --mono: "Polin", Arial, sans-serif;
+  --hand: "Polin", Arial, sans-serif;
+}
+html { font-synthesis: none; }
+body { font-family: "Polin", Arial, sans-serif; font-weight: 400; }
+button, input, textarea, select { font-family: inherit; }
+h1, h2, h3, h4, h5, h6, strong, b { font-weight: 700; }
+
+/* Explicit family overrides found in the survey source. */
+body.style-document .title,
+body.style-minimal .title {
+  font-family: "Polin", Arial, sans-serif;
+  font-weight: 700;
+}
